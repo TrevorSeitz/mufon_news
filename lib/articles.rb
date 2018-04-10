@@ -17,12 +17,12 @@ class Article
     @@all
   end
 
-  def display_summary
-    counter = 0
-    self.all.each do |article|
-      counter += 1
-      puts "#{counter}. #{@article_title}  -  #{@article_date}"
-    end
-  end
+  # def display_summary
+  #   counter = 0
+  #   self.all.each do |article|
+  #     counter += 1
+  #     puts "#{counter}. #{@article_title}  -  #{@article_date}"
+  #   end
+  # end
 
 end

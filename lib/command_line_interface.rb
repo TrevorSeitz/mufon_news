@@ -32,9 +32,12 @@ class CommandLineInterface
         Scraper.new(BASE_PATH + "ufo-news")
         puts `clear`
         puts "Welcome to MUFON's UFO news"
-        display_summary
+        display_story_list
       when "2"
-        break
+        Scraper.new(BASE_PATH + "mufon-news")
+        puts `clear`
+        puts "Welcome to MUFON news"
+        display_story_list
       end
     end
     puts `clear`
@@ -47,7 +50,7 @@ class CommandLineInterface
 
   end
 
-  def display_summary
+  def display_story_list
     counter = 0
     continue = ""
     user_input = ""
@@ -87,7 +90,7 @@ class CommandLineInterface
       continue  = gets.chomp.downcase
     end
     puts `clear`
-    display_summary
+    display_story_list
   end
 
 end
