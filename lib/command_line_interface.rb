@@ -128,7 +128,7 @@ class CommandLineInterface
         puts "-----------------------------------------------------------------------------"
         puts "\n \n"
       end
-      binding.pry
+      # binding.pry
       puts ""
       puts "type exit to return to the main menu"
       puts "or 'quit' to quit"
