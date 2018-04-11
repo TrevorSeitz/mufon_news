@@ -11,8 +11,6 @@ class Scraper
       parse_news(@doc)
     elsif site_url.include? "report"
       parse_report(@doc)
-    elsif site_url.include? "comments"
-      parse_comment(@doc)
     end
   end
   
@@ -48,10 +46,4 @@ class Scraper
     end
   end
 
-  def parse_comment(nokogiri_file)
-    # counter = 0
-    # nokogiri_file.css("tr").each do |row|
-      # binding.pry
-    # end
-  end
 end

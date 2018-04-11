@@ -1,6 +1,6 @@
-require_relative "../lib/scraper.rb"
-require_relative "../lib/articles.rb"
-require_relative "../lib/sighting_reports.rb"
+require_relative "../mufon_news/scraper.rb"
+require_relative "../mufon_news/articles.rb"
+require_relative "../mufon_news/sighting_reports.rb"
 require "nokogiri"
 
 class CommandLineInterface
@@ -101,18 +101,11 @@ class CommandLineInterface
       puts ""
       puts wrap(Article.all[index].article_text.gsub("by Roger Marsh", "by Roger Marsh \n").gsub("READ MORE", ""))
       puts ""
-      puts "type comments to see users comments on this story."
       
       puts "type 'exit' to return to the story list"
       continue  = gets.chomp.downcase
-      if continue == "exit"
-        puts `clear`
-        display_story_list
-      elsif continue == "comments"
-        # binding.pry
-        Scraper.new(Article.all[index].comments_url)
-        # puts wrap(Article.all[index].article_comments)
-      end
+      puts `clear`
+      display_story_list
     end
   end
 
