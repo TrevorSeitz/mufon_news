@@ -1,6 +1,7 @@
 require_relative "../lib/scraper.rb"
 require_relative "../lib/articles.rb"
-require 'nokogiri'
+require_relative "../lib/sighting_reports.rb"
+require "nokogiri"
 
 class CommandLineInterface
   BASE_PATH = "http://www.mufon.com/"
@@ -45,7 +46,12 @@ class CommandLineInterface
         puts "Welcome to MUFON news"
         display_story_list
       when "3"
-        break
+        Sighting.reset
+        Scraper.new("https://mufoncms.com/last_20_report.html")
+        puts `clear`
+        puts "Welcome to the MUFON Case Management System - LAST 20 SIGHTING REPORTS"
+        display_sightings
+        # binding.pry
       else 
         error = "\nI'm sorry, that option is not available. \nPlease choos an availble option from the list"
       end
@@ -53,21 +59,15 @@ class CommandLineInterface
     puts `clear`
     abort
   end
- 
-
-  def run
-    article_info
-
-  end
 
   def display_story_list
     continue = ""
     user_input = ""
 
     while user_input != "exit"
-    error = ""
-    counter = 0
-        puts ""
+      error = ""
+      counter = 0
+      puts ""
       Article.all.each do |article|
         counter += 1
         puts "#{counter}. #{article.article_title}  -  #{article.article_date}"
@@ -79,16 +79,16 @@ class CommandLineInterface
       puts "or 'quit' to quit"
       puts ""
       puts error
-    user_input = gets.chomp.downcase
-    if user_input == "exit"
-      puts `clear`
-      menu
-    elsif user_input == "quit"
-      puts `clear`
-      abort
-    end
-    index = user_input.to_i - 1
-    display_story(index)
+      user_input = gets.chomp.downcase
+      if user_input == "exit"
+        puts `clear`
+        menu
+      elsif user_input == "quit"
+        puts `clear`
+        abort
+      end
+      index = user_input.to_i - 1
+      display_story(index)
     end
     
   end
@@ -108,4 +108,39 @@ class CommandLineInterface
     display_story_list
   end
 
+  def display_sightings
+    continue = ""
+    user_input = ""
+
+    while user_input != "exit"
+      error = ""
+      counter = 0
+      puts `clear`
+      puts ""
+      Sighting.all.each do |row|
+        # binding.pry
+        counter += 1
+        puts counter
+        puts "Case # #{row.case_number} | Date of Event: #{row.date_of_event} | Date Reported: #{row.date_submitted}"
+        puts "Location:  #{row.city} - #{row.state}"  
+        puts ""
+        puts wrap(row.description, 75)
+        puts "-----------------------------------------------------------------------------"
+        puts "\n \n"
+      end
+      # binding.pry
+      puts ""
+      puts "type exit to return to the main menu"
+      puts "or 'quit' to quit"
+      puts ""
+      user_input = gets.chomp.downcase
+      if user_input == "exit"
+        puts `clear`
+        menu
+      elsif user_input == "quit"
+        puts `clear`
+        abort
+      end
+    end
+  end
 end
