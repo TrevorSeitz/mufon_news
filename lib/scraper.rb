@@ -5,12 +5,15 @@ class Scraper
 
   def initialize(site_url)
     @doc = Nokogiri::HTML(open(site_url))
-    parse(@doc)
+    if site_url.include? "news"
+      parse_news(@doc)
+    elsif site_url.include? "report"
+      parse_report(@doc)
+    end
   end
-
-  def parse(nokogiri_file)
+  
+  def parse_news(nokogiri_file)
     nokogiri_file.css(".blog-post").each do |article|
-      # binding.pry
       if article.css(".paragraph").text != ""
         @article_junk = article.css("h2 a").text,
         @article_title = article.css("h2 a").text,
@@ -22,5 +25,4 @@ class Scraper
       end
     end
   end
-
 end

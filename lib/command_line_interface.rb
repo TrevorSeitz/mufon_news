@@ -53,12 +53,6 @@ class CommandLineInterface
     puts `clear`
     abort
   end
- 
-
-  def run
-    article_info
-
-  end
 
   def display_story_list
     continue = ""
