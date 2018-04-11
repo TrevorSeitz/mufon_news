@@ -1,14 +1,18 @@
 require 'open-uri'
+require "nokogiri"
 require 'pry'
 
 class Scraper
 
   def initialize(site_url)
+    # binding.pry
     @doc = Nokogiri::HTML(open(site_url))
     if site_url.include? "news"
       parse_news(@doc)
     elsif site_url.include? "report"
       parse_report(@doc)
+    elsif site_url.include? "comments"
+      parse_comment(@doc)
     end
   end
   
@@ -20,7 +24,7 @@ class Scraper
         @article_info = article.css(".blog-date .date-text").first.children.text.gsub("\n\t\t", "").gsub("\n\t", ""),
         @article_text = article.css(".paragraph").text,
         @article_url = article.css(".blog-link @href").first.value, #find href for article
-        @comments_url = article.css(".blog-comments a @href").first.value,
+        @comments_url = article.css(".blog-comments a @href").first.value.gsub("//", ""),
         Article.new(@article_title, @article_info, @article_text, @article_url, @comments_url)
       end
     end
@@ -42,5 +46,12 @@ class Scraper
       # binding.pry
       end
     end
+  end
+
+  def parse_comment(nokogiri_file)
+    # counter = 0
+    # nokogiri_file.css("tr").each do |row|
+      # binding.pry
+    # end
   end
 end
