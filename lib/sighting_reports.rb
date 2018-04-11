@@ -1,4 +1,4 @@
-class Sightings
+class Sighting
 
   attr_accessor :case_number, :date_submitted, :date_of_event, :description, :city, :state
 
@@ -15,4 +15,13 @@ class Sightings
       @@all << self
     end
   end
+
+  def self.all
+    @@all
+  end
+
+  def self.reset
+    @@all = []
+  end
+
 end

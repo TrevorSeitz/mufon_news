@@ -25,4 +25,22 @@ class Scraper
       end
     end
   end
+
+  def parse_report(nokogiri_file)
+    counter = 0
+    nokogiri_file.css("tr").each do |row|
+      counter += 1
+      if counter > 3
+        @case_number = row.css("td")[0].text
+        @date_submitted = row.css("td")[1].text
+        @date_of_event = row.css("td")[2].text
+        @description = row.css("td")[3].text.gsub("{td}", "")
+        @city = row.css("td")[4].text
+        @state = row.css("td")[5].text
+        @junk = row.css("td")[6].text
+        Sighting.new(@case_number, @date_submitted, @date_of_event, @description, @city, @state)
+      # binding.pry
+      end
+    end
+  end
 end
