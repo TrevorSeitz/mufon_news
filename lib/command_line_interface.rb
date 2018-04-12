@@ -49,7 +49,7 @@ class CommandLineInterface
         Sighting.reset
         Scraper.new("https://mufoncms.com/last_20_report.html")
         puts `clear`
-        puts "Welcome to the MUFON Case Management System - LAST 20 SIGHTING REPORTS"
+        puts "Welcome to the MUFON Case Management System - MOST RECENT SIGHTING REPORTS"
         display_sightings
         # binding.pry
       else 
@@ -101,11 +101,12 @@ class CommandLineInterface
       puts ""
       puts wrap(Article.all[index].article_text.gsub("by Roger Marsh", "by Roger Marsh \n").gsub("READ MORE", ""))
       puts ""
+      
       puts "type 'exit' to return to the story list"
       continue  = gets.chomp.downcase
+      puts `clear`
+      display_story_list
     end
-    puts `clear`
-    display_story_list
   end
 
   def display_sightings

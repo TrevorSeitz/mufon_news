@@ -1,4 +1,5 @@
 require 'open-uri'
+require "nokogiri"
 require 'pry'
 
 class Scraper
@@ -20,7 +21,7 @@ class Scraper
         @article_info = article.css(".blog-date .date-text").first.children.text.gsub("\n\t\t", "").gsub("\n\t", ""),
         @article_text = article.css(".paragraph").text,
         @article_url = article.css(".blog-link @href").first.value, #find href for article
-        @comments_url = article.css(".blog-comments a @href").first.value,
+        @comments_url = article.css(".blog-comments a @href").first.value.gsub("//", ""),
         Article.new(@article_title, @article_info, @article_text, @article_url, @comments_url)
       end
     end
@@ -43,4 +44,5 @@ class Scraper
       end
     end
   end
+
 end
