@@ -1,6 +1,6 @@
-require_relative "../mufon_news/scraper.rb"
-require_relative "../mufon_news/articles.rb"
-require_relative "../mufon_news/sighting_reports.rb"
+require_relative "../lib/scraper.rb"
+require_relative "../lib/articles.rb"
+require_relative "../lib/sighting_reports.rb"
 require "nokogiri"
 
 class CommandLineInterface
@@ -49,7 +49,7 @@ class CommandLineInterface
         Sighting.reset
         Scraper.new("https://mufoncms.com/last_20_report.html")
         puts `clear`
-        puts "Welcome to the MUFON Case Management System - LAST 20 SIGHTING REPORTS"
+        puts "Welcome to the MUFON Case Management System - MOST RECENT SIGHTING REPORTS"
         display_sightings
         # binding.pry
       else 

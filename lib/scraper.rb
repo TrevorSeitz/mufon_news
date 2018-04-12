@@ -5,7 +5,6 @@ require 'pry'
 class Scraper
 
   def initialize(site_url)
-    # binding.pry
     @doc = Nokogiri::HTML(open(site_url))
     if site_url.include? "news"
       parse_news(@doc)
