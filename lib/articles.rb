@@ -1,5 +1,5 @@
 class Article
-  # This Class is used to scrape both the UFO news page and the MUFON news page
+  # This Class is used to build objects for both the UFO news page and the MUFON news page
   # some elements have been commented out but left in for future development options
 
   attr_accessor :article_title, :article_date, :article_text #, :article_url, :comments_url    -- for future development
