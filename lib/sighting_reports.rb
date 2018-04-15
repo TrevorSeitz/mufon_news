@@ -1,5 +1,5 @@
 class Sighting
-
+  # This Class is used to build objects for the rows of the Recent Sightings table
   attr_accessor :case_number, :date_submitted, :date_of_event, :description, :city, :state
 
   @@all = []
