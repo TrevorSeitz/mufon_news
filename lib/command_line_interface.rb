@@ -1,7 +1,3 @@
-require_relative "../lib/scraper.rb"
-require_relative "../lib/articles.rb"
-require_relative "../lib/sighting_reports.rb"
-
 class CommandLineInterface
   BASE_PATH = "http://www.mufon.com/"
 
@@ -23,7 +19,7 @@ class CommandLineInterface
       puts "What would you like to do?"
       puts "1. UFO news"
       puts "2. MUFON news"
-      puts "3. List of the last 20 UFO Reports"
+      puts "3. List of the latest UFO Reports"
       puts ""
       puts "type 'exit' to exit"
       puts ""
@@ -51,7 +47,7 @@ class CommandLineInterface
           puts "Welcome to the MUFON Case Management System - MOST RECENT SIGHTING REPORTS"
           display_sightings
         else 
-          error = "\nI'm sorry, that option is not available. \nPlease choos an availble option from the list"
+          error = "\nI'm sorry, that option is not available. \nPlease choose an availble option from the list"
       end
     end
     puts `clear` # clears the terminal before quiting
@@ -68,7 +64,7 @@ class CommandLineInterface
      
       puts ""
       Article.all.each_with_index do |article, index|
-        puts "#{index + 1}. #{article.article_title}  -  #{article.article_date}"
+          puts "#{index + 1}. #{article.article_title}  -  #{article.article_date}"
       end
       puts ""
       puts "Please choose a story"
